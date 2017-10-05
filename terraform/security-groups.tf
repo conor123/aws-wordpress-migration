@@ -1,4 +1,5 @@
 resource "aws_security_group" "db" {
+  vpc_id = "${aws_vpc.default.id}"
   name = "vpc_db"
   description = "Allow database connections"
 
@@ -38,8 +39,6 @@ resource "aws_security_group" "db" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  vpc_id = "${aws_vpc.default.id}"
-
   tags {
     Name = "DB-SG"
   }
@@ -47,6 +46,7 @@ resource "aws_security_group" "db" {
 
 
 resource "aws_security_group" "web" {
+  vpc_id = "${aws_vpc.default.id}"
   name = "vpc_web"
   description = "Allow incoming HTTP"
 
@@ -71,6 +71,7 @@ resource "aws_security_group" "web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+
   ingress {
     from_port = -1
     to_port = -1
@@ -86,7 +87,19 @@ resource "aws_security_group" "web" {
     cidr_blocks = ["${var.private_subnet_cidr_block}"]
   }
 
-  vpc_id = "${aws_vpc.default.id}"
+  egress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags {
     Name = "WebServer-SG"
