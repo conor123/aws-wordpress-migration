@@ -2,6 +2,16 @@ variable "aws_key_path" {}
 
 variable "aws_key_name" {}
 
+variable "aws_credentials" {}
+
+variable "chef_user" {}
+
+variable "chef_user_key" {}
+
+variable "chef_server_url" {}
+
+//variable "chef_secret_key" {}
+
 variable "vpc_region" {
     default = "eu-west-1"
 }
@@ -10,7 +20,10 @@ variable "vpc_amis" {
     type = "map"
     description = "VPC AMIs"
     default = {
-        eu-west-1 = "ami-06d11e7f" # ubuntu xenial 16.04 LTS
+        # ubuntu xenial 16.04 LTS - not HVM supported! 'ami-06d11e7f'
+
+        #Amazon Linux AMI 2017.09.0 (HVM), SSD Volume Type - ami-acd005d5
+        eu-west-1 = "ami-acd005d5"
     }
 }
 

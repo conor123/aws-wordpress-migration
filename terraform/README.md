@@ -1,4 +1,4 @@
-In this project we will build AWS Infrastructure for type 2 VPC:
+# AWS Infrastructure for type 2 VPC:
 
 - VPC
 - Internet Gateway
@@ -8,3 +8,6 @@ In this project we will build AWS Infrastructure for type 2 VPC:
 - Database server
 - Nat instance
 
+# Notes
+- add a terraform.tfvars file with secrets and file locations
+- Keep these secrets in  a key vault and NEVER commit to a repo
